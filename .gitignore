@@ -1,0 +1,4 @@
+
+*.pyc
+
+code/transformer_seq2seq/logs/
