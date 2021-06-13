@@ -238,7 +238,7 @@ class TransformerModel(nn.Module):
 
 		output_dim = output.shape[-1]
 		
-		self.loss = self.criterion(output.view(-1, output_dim), input_seq2[1:,:].view(-1))
+		self.loss = self.criterion(output.view(-1, output_dim), input_seq2[1:,:].reshape(-1))
 
 		self.loss.backward()
 		if self.config.max_grad_norm > 0:
