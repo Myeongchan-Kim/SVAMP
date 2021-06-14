@@ -85,11 +85,9 @@ def load_data(config, logger):
 		raise Exception('{} is not a valid mode'.format(config.mode))
 
 
-def main():
+def main(config):
 	'''read arguments'''
-	parser = build_parser()
-	args = parser.parse_args()
-	config = args
+
 	mode = config.mode
 	if mode == 'train':
 		is_train = True
@@ -384,7 +382,11 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+	parser = build_parser()
+	args = parser.parse_args()
+	config = args
+	print(config)
+	main(config)
 
 
 ''' Just docstring format '''
