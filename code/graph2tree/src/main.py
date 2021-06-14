@@ -66,10 +66,7 @@ def change_num(num):
 			new_num.append(float(item))
 	return new_num
 
-def main():
-	parser = build_parser()
-	args = parser.parse_args()
-	config = args
+def main(config):
 
 	if config.mode == 'train':
 		is_train = True
@@ -255,7 +252,7 @@ def main():
 						for train_batch in train_pairs:
 							batch_graph = get_single_example_graph(train_batch[0], train_batch[1], train_batch[7], train_batch[4], train_batch[5])
 							train_res = evaluate_tree(config, train_batch[0], train_batch[1], generate_num_ids, embedding, encoder, predict, generate,
-													 merge, input_lang, output_lang, train_batch[4], train_batch[5], batch_graph, test_batch[7], beam_size=config.beam_size)
+													 merge, input_lang, output_lang, train_batch[4], train_batch[5], batch_graph, train_batch[7], beam_size=config.beam_size)
 							train_val_ac, train_equ_ac, _, _ = compute_prefix_tree_result(train_res, train_batch[2], output_lang, train_batch[4], train_batch[6])
 
 							if train_val_ac:
@@ -568,7 +565,7 @@ def main():
 						for train_batch in train_pairs:
 							batch_graph = get_single_example_graph(train_batch[0], train_batch[1], train_batch[7], train_batch[4], train_batch[5])
 							train_res = evaluate_tree(config, train_batch[0], train_batch[1], generate_num_ids, embedding, encoder, predict, generate,
-													 merge, input_lang, output_lang, train_batch[4], train_batch[5], batch_graph, test_batch[7], beam_size=config.beam_size)
+													 merge, input_lang, output_lang, train_batch[4], train_batch[5], batch_graph, train_batch[7], beam_size=config.beam_size)
 							train_val_ac, train_equ_ac, _, _ = compute_prefix_tree_result(train_res, train_batch[2], output_lang, train_batch[4], train_batch[6])
 
 							if train_val_ac:
@@ -802,4 +799,8 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+	parser = build_parser()
+	args = parser.parse_args()
+	config = args
+	print(config)
+	main(config)
