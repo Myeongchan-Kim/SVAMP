@@ -14,13 +14,21 @@ warnings.filterwarnings("ignore")
 from src.utils.pre_data import *
 
 def gpu_init_pytorch(gpu_num):
-	'''
-		Initialize GPU
-	'''
-	torch.cuda.set_device(int(gpu_num))
-	device = torch.device("cuda:{}".format(
-		gpu_num) if torch.cuda.is_available() else "cpu")
-	return device
+    '''
+        Initialize GPU
+
+        Args:
+            gpu_num (int): Which GPU to use
+        Returns:
+            device (torch.device): GPU device
+    '''
+    if torch.cuda.is_available():
+        torch.cuda.set_device(int(gpu_num))
+        device = torch.device("cuda:{}".format(gpu_num))
+    else:
+        device = torch.device('cpu')
+    return device
+
 
 def create_save_directories(path):
 	if not os.path.exists(path):

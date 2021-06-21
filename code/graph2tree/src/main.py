@@ -38,7 +38,7 @@ def read_json(path):
 		file = json.load(f)
 	return file
 
-USE_CUDA = True
+USE_CUDA = False
 
 def get_new_fold(data,pairs,group):
 	new_fold = []
